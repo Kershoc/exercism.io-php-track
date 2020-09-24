@@ -1,2 +1,3 @@
 .exercism
 /hello-world/
+.php_cs.cache
