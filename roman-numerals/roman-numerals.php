@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 function toRoman(int $number): string
 {
     $romanNumeral = new RomanNumerals($number);
@@ -7,10 +9,26 @@ function toRoman(int $number): string
 
 class RomanNumerals
 {
+    /**
+    * @var string[] $ones
+    */
     private $ones = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+    /**
+    * @var string[] $tens
+    */
     private $tens = ['', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'];
+    /**
+    * @var string[] $huns
+    */
     private $huns = ['', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM'];
+    /**
+    * @var string[] $thou
+    */
     private $thou = [''];
+    /**
+    * @var int $number
+    */
+    private $number;
 
     public function __construct(int $number)
     {
@@ -23,7 +41,7 @@ class RomanNumerals
 
     public function carve(): string
     {
-        list($thou, $huns, $tens, $ones) = array_map('intval', str_split(str_pad($this->number, 4, "0", STR_PAD_LEFT)));
+        list($thou, $huns, $tens, $ones) = array_map('intval', str_split(str_pad(strval($this->number), 4, "0", STR_PAD_LEFT)));
         return $this->thou[$thou] . $this->huns[$huns] . $this->tens[$tens] . $this->ones[$ones];
     }
 
