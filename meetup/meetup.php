@@ -31,7 +31,10 @@ function get_teenth(string $day, int $month, int $year): int
 {
     foreach (range(13,19) as $dom) {
         $date = implode('/', [$month, $dom, $year]);
-        $dow = date('l', strtotime($date));
-        if ($day === $dow) return $dom;
+        if ($timestamp = strtotime($date)) {
+            $dow = date('l', $timestamp);
+            if ($day === $dow) return $dom;
+        }
     }
+    throw new RangeException("Day Not Found in Range");
 }
