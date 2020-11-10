@@ -2,6 +2,7 @@
 class Clock
 {
     const DAY_IN_MINUTES = 1440;
+    /** @var int $minutes */
     private $minutes;
 
     public function __construct(int $hour, int $minutes = 0)
