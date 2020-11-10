@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 function isValid(string $ccnum): bool
 {
@@ -8,6 +9,7 @@ function isValid(string $ccnum): bool
 
 class Luhn
 {
+    /** @var string $ccnum */
     private $ccnum;
 
     public function __construct(string $ccnum)
@@ -17,7 +19,11 @@ class Luhn
 
     public function clean(): self
     {
-        $this->ccnum = preg_replace('/\s+/u', '', $this->ccnum);
+        $scrubbed_ccnum = preg_replace('/\s+/u', '', $this->ccnum);
+        if (is_null($scrubbed_ccnum)) {
+            throw new Exception("Error cleaning CC Number");
+        }
+        $this->ccnum = $scrubbed_ccnum;
         return $this;
     }
 
@@ -35,7 +41,7 @@ class Luhn
         $digits = str_split(strrev($this->ccnum));
         $result = '';
         foreach ($digits as $i => $d) {
-            $result .= $i % 2 !==0 ? $d*2 : $d;
+            $result .= $i % 2 !==0 ? intval($d)*2 : $d;
         }
 
         return (array_sum(str_split($result)) % 10);
