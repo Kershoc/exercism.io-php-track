@@ -51,7 +51,7 @@ function decode(string $text, int $akey, int $bkey): string
     return $out;
 }
 
-function isCoPrime($a, $b): bool
+function isCoPrime(int $a, int $b): bool
 {
     return gmp_intval(gmp_gcd($a, $b)) === 1;
 }
