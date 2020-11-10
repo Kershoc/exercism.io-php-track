@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
- function steps(int $i)
+ function steps(int $i): int
  {
     if ($i < 1) {
 		throw new InvalidArgumentException("Only positive numbers are allowed");
