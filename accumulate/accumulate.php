@@ -1,6 +1,6 @@
 <?php
 
-function accumulate(array $input, callable $accumulator)
+function accumulate(array $input, callable $accumulator) :array
 {
     $return = [];
     foreach ($input as $item) {
