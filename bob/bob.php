@@ -3,11 +3,14 @@ declare(strict_types=1);
 
 class Bob
 {
+    /** @var string $heard */
     private $heard;
 
     public function respondTo(string $heard): string
     {
-        $this->heard = preg_replace('/\s+/u', '', $heard);
+        if ($heard = preg_replace('/\s+/u', '', $heard)) {
+            $this->heard = $heard;
+        }
 
         if ($this->heard === '') {
             return "Fine. Be that way!";
