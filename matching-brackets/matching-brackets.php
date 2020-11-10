@@ -14,7 +14,9 @@ class MatchingBrackets
         '{'=>'}',
         '('=>')'
     ];
+    /** @var array<string> $nest */
     private $nest = [];
+    /** @var string $input */
     private $input = '';
 
     public function __construct(string $input)
