@@ -9,7 +9,7 @@ function parse_binary(string $binary): int
 
     $res = 0;
     foreach (str_split(strrev($binary)) as $k => $v) {
-        $res += $v * 2**$k;
+        $res += intval($v) * 2**$k;
     }
     return $res;
 }
