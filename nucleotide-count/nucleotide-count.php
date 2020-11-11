@@ -1,4 +1,5 @@
 <?php
+/** @return array<string,int> */
 function nucleotideCount(string $dnaStrand): array
 {
 	$dnaStrand = strtolower($dnaStrand);
