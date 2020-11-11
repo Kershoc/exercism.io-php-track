@@ -1,5 +1,6 @@
 <?php
-function largest(int $min, int $max)
+/** @return array<int, array<int, array<int>>|int> */
+function largest(int $min, int $max): array
 {
     if ($min > $max) {
         throw new Exception();
@@ -13,7 +14,8 @@ function largest(int $min, int $max)
     return [$num, $factors];
 }
 
-function smallest(int $min, int $max)
+/** @return array<int, array<int, array<int>>|int> */
+function smallest(int $min, int $max): array
 {
     if ($min > $max) {
         throw new Exception();
@@ -27,13 +29,17 @@ function smallest(int $min, int $max)
     return [$num, $factors];
 }
 
-function paliProducts(array $range)
+/** 
+ * @param array<int> $range
+ * @return array<int> 
+ * */
+function paliProducts(array $range): array
 {
     $return = [];
     foreach ($range as $num) {
         foreach($range as $num1) {
             $product = $num * $num1;
-            if ((string)$product === strrev($product)) {
+            if (strval($product) === strrev(strval($product))) {
                 $return = array_merge($return, [$product]);
             }
         }
@@ -42,7 +48,8 @@ function paliProducts(array $range)
     return $return;
 }
 
-function factor(int $num, int $min, int $max)
+/** @return array<int, array<int>> */
+function factor(int $num, int $min, int $max): array
 {
     $return = [];
     for ($i = $min; $i <= sqrt($num); $i++) {
