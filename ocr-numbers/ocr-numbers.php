@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+/** @param array<string> $input */
 function recognize(array $input): string
 {
     $ocr = new OCRNumber($input);
@@ -27,9 +28,12 @@ class OCRNumber
     private const ROW_SEPARATOR = ',';
     private const UNKNOWN_DIGIT = '?';
 
+    /** @var array<string> $input */
     private $input;
+    /** @var array<array<string>> $digits */
     private $digits = [];
 
+    /** @param array<string> $input */
     public function __construct(array $input)
     {
         $this->input = $input;
