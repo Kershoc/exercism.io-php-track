@@ -10,6 +10,7 @@ function translate(string $input): string
 class IgpayAtinlayAnslatortay
 {
     private const SPLIT_REGEX = "/\b(s?qu|(?!yt|xr)[^aeiou ]+|)(\w+)/i";
+    /** @var string $input */
     private $input = '';
 
     public function __construct(string $input)
@@ -19,6 +20,8 @@ class IgpayAtinlayAnslatortay
 
     public function translate(): string
     {
-        return preg_replace(self::SPLIT_REGEX, "$2$1ay", $this->input);
+        $output = preg_replace(self::SPLIT_REGEX, "$2$1ay", $this->input);
+        if (is_null($output)) throw new Exception("Error translating input.");
+        return $output;
     }
 }
