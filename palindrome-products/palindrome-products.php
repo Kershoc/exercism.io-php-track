@@ -1,5 +1,5 @@
 <?php
-/** @return array<int, array<int, array<int>>|int> */
+/** @return array{int, array<array<int>>} */
 function largest(int $min, int $max): array
 {
     if ($min > $max) {
@@ -14,7 +14,7 @@ function largest(int $min, int $max): array
     return [$num, $factors];
 }
 
-/** @return array<int, array<int, array<int>>|int> */
+/** @return array{int, array<array<int>>} */
 function smallest(int $min, int $max): array
 {
     if ($min > $max) {
@@ -48,7 +48,7 @@ function paliProducts(array $range): array
     return $return;
 }
 
-/** @return array<int, array<int>> */
+/** @return array<array<int>> */
 function factor(int $num, int $min, int $max): array
 {
     $return = [];
