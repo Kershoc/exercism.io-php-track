@@ -12,6 +12,8 @@ class NicomachusClassification
     const NUMBER_PERFECT = 'perfect';
     const NUMBER_ABUNDANT = 'abundant';
     const NUMBER_DEFICIENT = 'deficient';
+    /** @var int $number */
+    private $number;
     
     public function __construct(int $number)
     {
@@ -24,12 +26,13 @@ class NicomachusClassification
     public function getClassification(): string
     {
         switch(($sum = $this->aliquotSum()) <=> $this->number) {
-            case 0:
-                if ($sum !== 1) return self::NUMBER_PERFECT;
-            case -1:
-                return self::NUMBER_DEFICIENT;
             case 1:
                 return self::NUMBER_ABUNDANT;
+            case 0:
+                if ($sum !== 1) return self::NUMBER_PERFECT;
+            default:
+            case -1:
+                return self::NUMBER_DEFICIENT;
         }
     }
 
