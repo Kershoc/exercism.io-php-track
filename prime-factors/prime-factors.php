@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+/** @return array<int> */
 function factors(int $num): array 
 {
     $divisor = 2;
