@@ -15,7 +15,7 @@ class School
         return $this->roster[$grade] ?? [];
     }
 
-    public function rosterByGradeAlphabetical(): array
+    public function studentsByGradeAlphabetical(): array
     {
         $roster = $this->roster;
         foreach ($roster as &$students) {
