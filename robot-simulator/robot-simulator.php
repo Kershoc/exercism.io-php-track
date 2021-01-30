@@ -10,12 +10,24 @@ class Robot
     public const DIRECTION_WEST = 4;
     private const X_AXIS = 0;
     private const Y_AXIS = 1;
-    private const LEFT = "L";
-    private const RIGHT = "R";
-    private const ADVANCE = "A";
+    private const L = 'turnLeft';
+    private const R = 'turnRight';
+    private const A = 'advance';
+    private $compass = [
+        self::DIRECTION_NORTH,
+        self::DIRECTION_EAST,
+        self::DIRECTION_SOUTH,
+        self::DIRECTION_WEST
+    ];
 
     public $position = [0,0];
-    public $direction = self::DIRECTION_NORTH;
+
+    public function __get(string $name)
+    {
+        if ($name === 'direction') {
+            return $this->{$name}();
+        }
+    }
 
     public function __construct(array $position, int $direction)
     {
@@ -25,66 +37,53 @@ class Robot
         if ($position !== array_filter($position, 'is_int')) {
             throw new InvalidArgumentException('[x,y] coords must be integers');
         }
-        if ($direction < self::DIRECTION_NORTH || $direction > self::DIRECTION_WEST) {
+        if (!in_array($direction, $this->compass)) {
             throw new InvalidArgumentException('Invalid Direction');
         }
         $this->position = $position;
-        $this->direction = $direction;
+        while (current($this->compass) !== $direction) {
+            next($this->compass);
+        }
     }
 
     public function turnLeft(): self
     {
-        $this->direction--;
-        if ($this->direction < self::DIRECTION_NORTH) {
-             $this->direction = self::DIRECTION_WEST;
-        }
-        return $this;
+        return $this->turn('prev');
     }
 
     public function turnRight(): self
     {
-        $this->direction++;
-        if ($this->direction > self::DIRECTION_WEST) {
-            $this->direction = self::DIRECTION_NORTH;
-        }
-        return $this;
+        return $this->turn('next');
     }
 
     public function advance(): self
     {
-        switch ($this->direction) {
-            case self::DIRECTION_NORTH:
-                $this->position[self::Y_AXIS]++;
-                break;
-            case self::DIRECTION_EAST:
-                $this->position[self::X_AXIS]++;
-                break;
-            case self::DIRECTION_SOUTH:
-                $this->position[self::Y_AXIS]--;
-                break;
-            case self::DIRECTION_WEST:
-                $this->position[self::X_AXIS]--;
-                break;
-        }
+        $axis = (current($this->compass) % 2 === 0) ? self::X_AXIS : self::Y_AXIS;
+        (current($this->compass) > self::DIRECTION_EAST) ? $this->position[$axis]-- : $this->position[$axis]++;
         return $this;
     }
 
     public function instructions(string $instructions): void
     {
         foreach (str_split($instructions) as $instruction) {
-            switch ($instruction) {
-                case self::LEFT:
-                    $this->turnLeft();
-                    break;
-                case self::RIGHT:
-                    $this->turnRight();
-                    break;
-                case self::ADVANCE:
-                    $this->advance();
-                    break;
-                default:
-                    throw new InvalidArgumentException('I do not understand - ' . $instruction);
+            if (!defined("self::$instruction")) {
+                throw new InvalidArgumentException('I do not understand - ' . $instruction);
             }
+            $this->{constant("self::$instruction")}();
         }
+    }
+
+    private function turn(string $direction): self
+    {
+        $direction($this->compass);
+        if (key($this->compass) === null) {
+            ($direction == 'next') ? reset($this->compass) : end($this->compass);
+        }
+        return $this;
+    }
+
+    private function direction()
+    {
+        return current($this->compass);
     }
 }
