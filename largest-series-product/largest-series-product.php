@@ -5,6 +5,7 @@ declare(strict_types=1);
 class Series
 {
     private $series;
+
     public function __construct(string|int $series)
     {
         $series = (string) $series;
