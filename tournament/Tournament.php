@@ -60,7 +60,7 @@ class TournamentLexer
     }
     private function tokenize(string $line): GameToken
     {
-        list($home, $away, $result) = explode($this->separator, $line);
+        [$home, $away, $result] = explode($this->separator, $line);
         return new GameToken($home, $away, $result);
     }
 }
