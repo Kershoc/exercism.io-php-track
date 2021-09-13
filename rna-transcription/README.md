@@ -1,4 +1,9 @@
-# RNA Transcription
+# Rna Transcription
+
+Welcome to Rna Transcription on Exercism's PHP Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
+
+## Instructions
 
 Given a DNA strand, return its RNA complement (per RNA transcription).
 
@@ -18,29 +23,17 @@ each nucleotide with its complement:
 * `T` -> `A`
 * `A` -> `U`
 
-
-## Running the tests
-
-1. Go to the root of your PHP exercise directory, which is `<EXERCISM_WORKSPACE>/php`.
-   To find the Exercism workspace run
-
-        % exercism debug | grep Workspace
-
-1. Get [PHPUnit] if you don't have it already.
-
-        % wget --no-check-certificate https://phar.phpunit.de/phpunit.phar
-        % chmod +x phpunit.phar
-
-2. Execute the tests:
-
-        % ./phpunit.phar rna-transcription/rna-transcription_test.php
-
-[PHPUnit]: http://phpunit.de
-
-
 ## Source
 
-Rosalind [http://rosalind.info/problems/rna](http://rosalind.info/problems/rna)
+### Contributed to by
 
-## Submitting Incomplete Solutions
-It's possible to submit an incomplete solution so you can see how others have completed the exercise.
+- @arueckauer
+- @dkinzer
+- @kunicmarko20
+- @kytrinyx
+- @lafent
+- @petemcfarlane
+
+### Based on
+
+Hyperphysics - http://hyperphysics.phy-astr.gsu.edu/hbase/Organic/transcription.html
